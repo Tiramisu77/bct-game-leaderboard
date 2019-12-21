@@ -24,7 +24,7 @@ const predictions = `1308       Yassin
 7080       aundroid    *
 7187       Spray.
 7266       irsada
-7375       dragonvslinux *
+7375       <script type="text/javascript">document.write(dragonvslinux.link(https://bitcointalk.org/index.php?topic=5188987.msg52610099#msg52610099));</script> *
 7510       illyiller            *H
 7650       hatshepsut93
 7777       rosezionjohn
