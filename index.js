@@ -235,18 +235,19 @@ async function main() {
         .split("\n")
         .map(e => {
             let [price, user] = e.split("      ");
-            price = price.split("-").map(e => Number(e.replace(/,/g, "")));
-            user = user.replace(" *", "").trim()
-            delta = btcPrice > price[1] ? Math.abs(btcPrice - price[1]) : Math.abs(btcPrice - price[0]) //Math.abs(btcPrice - (price[0] + price[1]) / 2) 
-            sign = btcPrice > price[1] ? "-" : "+"
-            return { price, user, delta, sign };
+             price = price.split("-").map(e => Number(e.replace(/,/g, "")));
+             user = user.replace(" *", "").trim()
+            let delta1 = btcPrice > price[1] ? Math.abs(btcPrice - price[1]) : Math.abs(btcPrice - price[0])
+            let delta2 = Math.abs(btcPrice - (price[0] + price[1]) / 2)
+            let sign = btcPrice > price[1] ? "-" : "+"
+            return { price, user, delta1,delta2, sign };
         })
-        .sort((a, b) => a.delta - b.delta);
+        .sort((a, b) => a.delta2 - b.delta2);
     const table = document.querySelector("#table");
-    table.innerHTML = ""   
-    
+    table.innerHTML = ""
+
     let i = 0
-    for (const { user, price, delta, sign } of leaderBoard) {
+    for (const { user, price, delta1,delta2, sign } of leaderBoard) {
         const item = document.createElement("tr");
 
 
@@ -260,7 +261,7 @@ async function main() {
 
         }
         else {
-            deltaTd.textContent = `${sign}${delta.toFixed(0)}`
+            deltaTd.textContent = `${sign}${delta1.toFixed(0)}`
         }
         item.append(priceTd)
         item.append(deltaTd)
